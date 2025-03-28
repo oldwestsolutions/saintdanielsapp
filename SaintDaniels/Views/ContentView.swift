@@ -40,11 +40,17 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-            .environmentObject(AuthenticationManager())
-    }
+#Preview("Content View - Signed Out") {
+    ContentView()
+        .environmentObject(AuthenticationManager())
+}
+
+#Preview("Content View - Signed In") {
+    let authManager = AuthenticationManager()
+    authManager.signIn(email: "demo@example.com", password: "password")
+    
+    return ContentView()
+        .environmentObject(authManager)
 }
 
 struct AuthenticationView: View {

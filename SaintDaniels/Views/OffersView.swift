@@ -54,10 +54,28 @@ struct OfferCard: View {
     }
 }
 
-struct OffersView_Previews: PreviewProvider {
-    static var previews: some View {
-        OffersView()
-    }
+#Preview("Offers View") {
+    OffersView()
+}
+
+#Preview("Offer Card - With Points") {
+    OfferCard(offer: Offer(
+        id: UUID(),
+        title: "Vision Discount",
+        description: "20% off eyewear",
+        pointsCost: 500
+    ))
+    .padding()
+}
+
+#Preview("Offer Card - No Points") {
+    OfferCard(offer: Offer(
+        id: UUID(),
+        title: "$50 Gift Card",
+        description: "Complete your annual physical",
+        pointsCost: nil
+    ))
+    .padding()
 }
 
 struct ProfileView: View {
