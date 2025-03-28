@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct OffersView: View {
-    @State private var offers: [Offer] = [
+    @State private var offers = [
         Offer(id: UUID(), title: "$50 Gift Card", description: "Complete your annual physical", pointsCost: nil),
         Offer(id: UUID(), title: "Free Dental Cleaning", description: "Schedule within 30 days", pointsCost: nil),
-        Offer(id: UUID(), title: "Vision Discount", description: "20% off eyewear", pointsCost: nil)
+        Offer(id: UUID(), title: "Vision Discount", description: "20% off eyewear", pointsCost: 500)
     ]
     
     var body: some View {
@@ -51,6 +51,12 @@ struct OfferCard: View {
         }
         .padding()
         .royalCardStyle()
+    }
+}
+
+struct OffersView_Previews: PreviewProvider {
+    static var previews: some View {
+        OffersView()
     }
 }
 

@@ -4,13 +4,46 @@ struct ContentView: View {
     @EnvironmentObject var authManager: AuthenticationManager
     
     var body: some View {
-        Group {
-            if authManager.isAuthenticated {
-                DashboardView()
-            } else {
-                AuthenticationView()
+        NavigationView {
+            VStack(spacing: 20) {
+                Image(systemName: "shield.checkered")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 100, height: 100)
+                    .foregroundColor(Theme.accentColor)
+                
+                Text("Saint Daniels")
+                    .font(Theme.titleFont)
+                    .foregroundColor(Theme.primaryColor)
+                
+                Text("Royal Healthcare")
+                    .font(Theme.headingFont)
+                    .foregroundColor(Theme.accentColor)
+                
+                if authManager.isAuthenticated {
+                    DashboardView()
+                } else {
+                    Button(action: {
+                        authManager.signIn(email: "demo@example.com", password: "password")
+                    }) {
+                        Text("Sign In")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .royalButtonStyle()
+                    .padding(.horizontal)
+                }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Theme.backgroundColor)
+            .navigationBarTitleDisplayMode(.inline)
         }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+            .environmentObject(AuthenticationManager())
     }
 }
 
